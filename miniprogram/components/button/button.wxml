@@ -1,0 +1,3 @@
+<view class="k-button" bindtap="handleTap">
+  <slot></slot>
+</view>

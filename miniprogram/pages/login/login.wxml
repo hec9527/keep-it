@@ -1,0 +1,15 @@
+<view class="login-page">
+
+  <view class="login-poster">
+    <image class="login-icon" src="/asserts/svg/login.svg" />
+  </view>
+
+  <view class="login-tips">
+    登录后即可享受数据同步
+  </view>
+
+  <view class="login-btn" bind:tap="handleLogin">
+    立即登录
+  </view>
+
+</view>
