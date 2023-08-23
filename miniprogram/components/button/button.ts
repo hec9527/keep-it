@@ -1,12 +1,28 @@
+import { cls } from "../../utils/util";
+
 Component({
+  data: {
+    cls: "k-button",
+  },
+
   /**
    * 组件的属性列表
    */
   properties: {
+    block: Boolean,
+    size: String,
     type: String,
-    text: String,
+    sharp: String,
     disabled: Boolean,
     loading: Boolean,
+  },
+
+  observers: {
+    block: function (block) {
+      const s = cls("k-button", { block });
+      console.log(s);
+      this.setData({ cls: s });
+    },
   },
 
   /**

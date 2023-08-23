@@ -1,0 +1,33 @@
+<view class="add-task-page">
+  <view class="card">
+    <k-form-item label='计划类型'>
+      <k-select value="{{taskType}}" options="{{taskTypeOptions}}" bind:change="handleTaskTypeChange"></k-select>
+    </k-form-item>
+    <k-form-item label="计划名称">
+      <input type="text" placeholder="请输入" value="{{title}}" placeholder-class="placeholder" bindinput="handleInputChange" />
+    </k-form-item>
+    <k-form-item label='计划描述'>
+      <input type="text" placeholder="请输入（可选）" placeholder-class="placeholder" value="{{description}}" bindinput="handleDescriptionChange" />
+    </k-form-item>
+
+  </view>
+  <view class=" card">
+    <!-- <k-form-item label="计划周期">
+      <k-select value="{{intervel}}" options="{{intervelOptions}}" bind:change="handleIntervelChange"></k-select>
+    </k-form-item> -->
+    <k-form-item label="开始时间">
+      <picker mode="date" bind:change="handleStartTimeChange">
+        <view wx:if="{{startTime!=undefined && startTime!=''}}">{{startTime}}</view>
+        <view wx:else class="placeholder">请选择</view>
+      </picker>
+    </k-form-item>
+    <k-form-item label="结束时间">
+      <picker mode="date" bind:change="handleEndTimeChange" start="{{minEndTime}}">
+        <view wx:if="{{endTime!=undefined && endTime!=''}}">{{endTime}}</view>
+        <view wx:else class="placeholder">请选择</view>
+      </picker>
+    </k-form-item>
+  </view>
+
+  <view class="block-button" bind:tap="handleCreateClick">创建计划</view>
+</view>

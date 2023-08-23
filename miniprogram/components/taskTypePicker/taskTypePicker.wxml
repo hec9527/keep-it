@@ -1,0 +1,19 @@
+<page-container class="task-type-pickers" show="{{visible}}" overlay>
+  <view class="picker-header">
+    <view class="back" bind:tap="bindCancel">
+      返回
+    </view>
+    <view class="ok" bind:tap="bindOk">
+      确定
+    </view>
+  </view>
+
+  <view class="picker-body">
+    <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{[value]}}" bindchange="bindChange" bindpickstart>
+      <picker-view-column>
+        <view wx:for="{{options}}" wx:key="type" style="line-height: 50px; text-align: center;">{{item.label}}</view>
+      </picker-view-column>
+    </picker-view>
+  </view>
+
+</page-container>

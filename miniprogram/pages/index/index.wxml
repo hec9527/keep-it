@@ -1,23 +1,53 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <block wx:if="{{canIUseOpenData}}">
-      <view class="userinfo-avatar" bindtap="bindViewTap">
-        <open-data type="userAvatarUrl"></open-data>
+<view class="index-page">
+  <view class="user-info">
+    <view class="user-avatar">
+      <image src="{{userInfo.avatarUrl}}" class="avatar-img" />
+    </view>
+    <view class="user-profile">
+      <view class="nick-name">{{userInfo.nickName}}，欢迎回来</view>
+      <view class="last-login">上次登录时间：{{lastLogin}}</view>
+    </view>
+  </view>
+
+
+  <view wx:if="{{!allTasks.length}}" class="not-found">
+    <image class="not-found-img" src="/asserts/svg/empty.svg" />
+    <view class="not-found-tips">当前还没有打卡目标，赶紧创建一个吧</view>
+    <view class="add-button block-button" bind:tap="onTapAdd">创建打卡目标</view>
+  </view>
+
+  <view wx:else class="main">
+    <view class="filter-wrap">
+      <view wx:for="{{filters}}" wx:key="item.status" class="filter-item {{filterStatus == item.status?'active':''}}" data-status="{{item.status}}" bind:tap="handleFilterClick">
+        {{item.label}}
       </view>
-      <open-data type="userNickName"></open-data>
-    </block>
-    <block wx:elif="{{!hasUserInfo}}">
-      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-      <view wx:else> 请使用1.4.4及以上版本基础库 </view>
-    </block>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+    </view>
+
+    <view wx:for="{{tasks}}" wx:key="id" class="plan-item" data-id="{{item.id}}" data-type="{{item.taskType}}" bind:tap="handlePlanTap">
+      <view class="cover">
+        <image class="cover-img" mode="aspectFill" src="{{item.cover}}" />
+        <view class="cover-mask"></view>
+      </view>
+      <view class="info">
+        <view class="header">
+          <view class="title">{{item.title}}</view>
+          <view>
+            <view class="progress-bar">
+              <view class="progress-track"></view>
+            </view>
+            <view class="progress"></view>
+          </view>
+        </view>
+        <view class="desc">
+          {{item.description}}
+        </view>
+      </view>
+    </view>
+
+    <root-portal>
+      <image class="add-more" src="/asserts/svg/add.svg" bind:tap="onTapAdd" />
+    </root-portal>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+
+  <view class="about" bind:tap="toAboutPage">关于</view>
 </view>

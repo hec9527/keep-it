@@ -1,5 +1,25 @@
 /* components/button/button.wxss */
 .k-button {
+  --padding: 4px 8px;
+  --radius: 4px;
+
   background-color: red;
   display: inline-block;
+  padding: var(--padding);
+  border-radius: var(--radius);
+  border: none;
+  box-sizing: border-box;
+
+  &.round {
+    --radius: 999px;
+  }
+
+  &.small {
+    --padding: 4px 8px;
+    --radius: 4px;
+  }
+
+  &.block {
+    display: block;
+  }
 }

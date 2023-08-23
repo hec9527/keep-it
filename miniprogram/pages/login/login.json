@@ -1,6 +1,4 @@
 {
-  "usingComponents": {
-    "k-button": "/components/button/button"
-  },
+  "usingComponents": {},
   "navigationStyle": "custom"
 }

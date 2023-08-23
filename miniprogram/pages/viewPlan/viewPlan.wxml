@@ -1,0 +1,33 @@
+<view class="plan-detail-page">
+  <image src="{{plan.cover}}" class="back-img" mode="aspectFill" />
+
+  <view class="plan-detail-main">
+    <view class="plan-detail card">
+      <view class="title">
+        <text>#</text>
+        <view class="title-text">{{plan.title}}</view>
+        <text>#</text>
+      </view>
+      <view wx:if="{{plan.description}}" class="plan-info-item">
+        <view class="plan-info-label">描述说明</view>
+        <view class="plan-info-desc desc">{{plan.description}}</view>
+      </view>
+      <!-- <view class="plan-info-item">
+        <view class="plan-info-label">时间周期</view>
+        <view class="plan-info-desc intervel">{{plan.intervel}}</view>
+      </view> -->
+      <view class="plan-info-item">
+        <view class="plan-info-label">计划周期</view>
+        <view class="plan-info-desc time">{{plan.startTime}} - {{plan.endTime}}</view>
+      </view>
+    </view>
+
+    <view wx:if="{{plan.status==='process'}}" class="sign-button-wrap flex-center" catch:touchstart="handleTouchSign" catch:touchend="handleEndSign">
+      <view class="sign-button-outline{{pressed?' pressed':''}}"></view>
+      <view class="sign-button flex-center">
+        <view class="sign-title">{{signToday?"今日已打卡":"立即打卡"}}</view>
+      </view>
+    </view>
+
+  </view>
+</view>

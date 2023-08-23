@@ -1,0 +1,18 @@
+lockfileVersion: '6.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+devDependencies:
+  miniprogram-api-typings:
+    specifier: ^3.11.0
+    version: registry.npmmirror.com/miniprogram-api-typings@3.11.0
+
+packages:
+
+  registry.npmmirror.com/miniprogram-api-typings@3.11.0:
+    resolution: {integrity: sha512-jMYeqEOGZc1dq7MR8Zu1tj1zmzlvATlvsUb7eFaTYk8LoBVrbgdGUWwVjAmFFNjNdiUaokceGeJaByAa5QYpKw==, registry: http://registry.shuqudata.com/, tarball: https://registry.npmmirror.com/miniprogram-api-typings/-/miniprogram-api-typings-3.11.0.tgz}
+    name: miniprogram-api-typings
+    version: 3.11.0
+    dev: true

@@ -1,4 +1,4 @@
-export {};
+import { CACHEK_KEY_USER_INFO } from "../../constants/index";
 
 const app = getApp();
 
@@ -9,8 +9,9 @@ Page({
       success: (res) => {
         app.globalData.userInfo = res.userInfo;
         console.log(res);
+        wx.setStorageSync(CACHEK_KEY_USER_INFO, res.userInfo);
         const url = this.options ? this.options.redirectUrl : undefined;
-        wx.navigateTo({ url: url || "/pages/index/index" });
+        wx.redirectTo({ url: url || "/pages/index/index" });
       },
     });
   },

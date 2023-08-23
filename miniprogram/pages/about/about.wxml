@@ -1,0 +1,29 @@
+<view class="about-page">
+  <view class="section">
+    <view class="section-title">数据隐私</view>
+    <view class="section-desc">获取微信信息是为了区分用户，防止因切换微信账户导致泄露数据隐私。另外本小程序没有后端服务器，所有数据都存储在用户本地，同时也不收集任何个人隐私数据，可以放心使用。</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">关于打卡达人</view>
+    <view class="section-desc">打卡达人是免费开源的打卡工具，支持自定义打卡任务，并且每天打卡。项目地址：https://github.com/hec9527/keep-it</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">反馈</view>
+    <view class="section-desc">
+      在使用过程中如果遇到了什么问题，或者有更好的意见或建议，请前往项目地址提issues
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">copyright</view>
+    <view class="section-desc">
+      本项目版权归github用户hec9527所有，项目采用MIT协议开源，支持二次修改分发。
+    </view>
+  </view>
+
+  <view class="clear-all" bind:tap="handleClearAll">
+    清除缓存
+  </view>
+</view>

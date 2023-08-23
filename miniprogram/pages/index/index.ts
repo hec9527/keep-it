@@ -1,53 +1,58 @@
-// index.ts
-// 获取应用实例
+import { CACHE_KEY_TASKS, Filters } from "../../constants/index";
+
 const app = getApp<IAppOption>();
 
 Page({
   data: {
-    motto: "Hello World",
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse("button.open-type.getUserInfo"),
-    canIUseGetUserProfile: false,
-    canIUseOpenData:
-      wx.canIUse("open-data.type.userAvatarUrl") &&
-      wx.canIUse("open-data.type.userNickName"), // 如需尝试获取用户信息可改为false
+    userInfo: {} as WechatMiniprogram.UserInfo,
+    allTasks: [] as IPlan[],
+    tasks: [] as IPlan[],
+    visible: false,
+    filters: Filters,
+    filterStatus: "all" as IFilterItem["status"],
+    lastLogin: "",
   },
 
   onLoad() {
-    console.log(app.globalData.userInfo);
+    this.setData(
+      {
+        userInfo: app.globalData.userInfo,
+        lastLogin: app.globalData.lastLogin,
+      },
+      () => console.log(this.data)
+    );
+  },
 
-    if (!app.globalData.userInfo) {
-      wx.navigateTo({ url: `/pages/login/login?redirectUrl=/${this.route}` });
+  onShow() {
+    const res: IPlan[] = wx.getStorageSync(CACHE_KEY_TASKS);
+    console.log("计划：", res);
+    if (res) {
+      this.setData({ allTasks: res, tasks: res });
     }
   },
 
-  // 事件处理函数
-  bindViewTap() {
-    wx.navigateTo({
-      url: "../logs/logs",
-    });
+  handleFilterClick(data: WechatMiniprogram.CustomEvent<any>) {
+    const status = data.currentTarget.dataset.status;
+    console.log(status);
+    const tasks = this.data.allTasks.filter(
+      (task) => task.status === status || status === "all"
+    );
+    this.setData({ filterStatus: status, tasks });
   },
 
-  getUserProfile() {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    wx.getUserProfile({
-      desc: "展示用户信息", // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        console.log(res);
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true,
-        });
-      },
-    });
+  handlePlanTap(data: WechatMiniprogram.CustomEvent<any>) {
+    const id = data.currentTarget.dataset.id;
+    const type = data.currentTarget.dataset.type;
+    if (id) {
+      wx.navigateTo({ url: `/pages/viewPlan/viewPlan?id=${id}&type=${type}` });
+    }
   },
-  getUserInfo(e: any) {
-    // 不推荐使用getUserInfo获取用户信息，预计自2021年4月13日起，getUserInfo将不再弹出弹窗，并直接返回匿名的用户个人信息
-    console.log(e);
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true,
-    });
+
+  toAboutPage() {
+    wx.navigateTo({ url: "/pages/about/about" });
+  },
+
+  onTapAdd() {
+    wx.navigateTo({ url: "/pages/addTask/addTask" });
   },
 });

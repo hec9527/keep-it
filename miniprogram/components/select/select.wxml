@@ -1,0 +1,7 @@
+<view class="selecter">
+  <view bind:tap="handleSelect">
+    <view wx:if="{{value===undefined||value===''}}" class="placeholder">请选择</view>
+    <view class="select-value">{{value}}</view>
+  </view>
+  <k-picker wx:if="{{pickerExist}}" visible="{{pickerVisible}}" value="{{value}}" options="{{options}}" bind:cancel="handleCancel" bind:ok="handleOk"></k-picker>
+</view>

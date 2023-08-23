@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "k-select": "/components/select/select",
+    "k-form-item": "/components/form-item/form-item"
+  },
+  "navigationStyle": "default",
+  "navigationBarTitleText": "制定计划",
+  "navigationBarBackgroundColor": "#74a0a8",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": false
+}

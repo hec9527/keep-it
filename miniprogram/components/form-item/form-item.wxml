@@ -1,0 +1,9 @@
+<view class="form-item">
+  <view class="form-label">{{label}}</view>
+  <view class="form-content">
+    <slot></slot>
+    <view class="form-icon">
+      <image src="/asserts/svg/arrow_right.png" />
+    </view>
+  </view>
+</view>
