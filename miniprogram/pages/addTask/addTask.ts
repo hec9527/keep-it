@@ -4,6 +4,8 @@ import {
   getDaysFromNow,
   getDiffDays,
   getPlanStatus,
+  formatDateString,
+  addDay,
 } from "../../utils/util";
 
 Page({
@@ -17,6 +19,7 @@ Page({
     startTime: getDaysFromNow(),
     endTime: getDaysFromNow(7),
     minEndTime: getDaysFromNow(1),
+    maxEndTime: getDaysFromNow(180),
   } as Omit<
     IPlan,
     "id" | "allSignDays" | "signedDays" | "status" | "cover" | "cover"
@@ -45,17 +48,39 @@ Page({
   handleStartTimeChange(
     data: WechatMiniprogram.CustomEvent<{ value: string }>
   ) {
-    this.setData({ startTime: data.detail.value });
+    const startTime = data.detail.value.replace(/-/g, "/");
+    const sDate = new Date(startTime);
+    this.setData({
+      startTime,
+      endTime: formatDateString(addDay(sDate, 7)),
+      minEndTime: formatDateString(addDay(sDate, 1)),
+    });
   },
 
   handleEndTimeChange(data: WechatMiniprogram.CustomEvent<{ value: string }>) {
-    this.setData({ endTime: data.detail.value });
+    const endTime = data.detail.value.replace(/-/g, "/");
+    const diffDays = getDiffDays(this.data.startTime, endTime);
+    if (diffDays > 90) {
+      // wx.showToast({ title: "计划周期不能超过90天" });
+      wx.showModal({
+        content: "计划周期不能超过90天",
+        confirmText: "知道了",
+        showCancel: false,
+      });
+      this.setData({
+        endTime: formatDateString(addDay(this.data.startTime, 90)),
+      });
+    } else {
+      this.setData({ endTime });
+    }
   },
 
   checkData() {
     const d = this.data;
     if (!d.taskType) return "请选择计划类型";
     if (!d.title) return "给计划起一个名称";
+    if (+new Date(d.endTime) < +new Date(d.startTime))
+      return "开始时间不能小于结束时间";
     return undefined;
   },
 

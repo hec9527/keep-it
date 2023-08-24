@@ -21,16 +21,20 @@ const formatNumber = (n: number) => {
   return s[1] ? s : "0" + s;
 };
 
-export const formatDateString = (date: string | number) => {
+export const formatDateString = (date: Date | string | number, split = "/") => {
   const d = new Date(date);
   const year = d.getFullYear();
   const month = d.getMonth() + 1;
   const day = d.getDate();
-  return [year, month, day].map(formatNumber).join("-");
+  return [year, month, day].map(formatNumber).join(split);
+};
+
+export const addDay = (date: Date | string | number, days = 0) => {
+  return new Date(+new Date(date) + ONE_DAY * days);
 };
 
 export const getDaysFromNow = (days = 0) => {
-  return formatDateString(+new Date() + ONE_DAY * days);
+  return formatDateString(addDay(Date.now(), days));
 };
 
 export const getPlanStatus = (
@@ -140,4 +144,8 @@ export const calcProgress = (
       console.warn(`未知的时间间隔:${intervel}`);
       return 1;
   }
+};
+
+export const minMax = (value: number, min = 0, max = 1) => {
+  return Math.min(max, Math.max(min, value));
 };

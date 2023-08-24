@@ -1,3 +1,0 @@
-<view class="{{cls}}" bindtap="handleTap">
-  <slot></slot>
-</view>

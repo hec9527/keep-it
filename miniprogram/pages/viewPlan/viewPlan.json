@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "calendar": "/components/calendar/carlendar"
+  },
   "navigationBarTitleText": "计划详情"
 }

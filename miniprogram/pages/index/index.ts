@@ -10,17 +10,14 @@ Page({
     visible: false,
     filters: Filters,
     filterStatus: "all" as IFilterItem["status"],
-    lastLogin: "",
+    lastLogin: "无",
   },
 
   onLoad() {
-    this.setData(
-      {
-        userInfo: app.globalData.userInfo,
-        lastLogin: app.globalData.lastLogin,
-      },
-      () => console.log(this.data)
-    );
+    this.setData({
+      userInfo: app.globalData.userInfo,
+      lastLogin: app.globalData.lastLogin,
+    });
   },
 
   onShow() {

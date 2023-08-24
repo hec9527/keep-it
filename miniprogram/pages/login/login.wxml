@@ -5,7 +5,7 @@
   </view>
 
   <view class="login-tips">
-    登录后即可享受数据同步
+    授权微信头像和昵称后即可开始使用
   </view>
 
   <view class="login-btn" bind:tap="handleLogin">

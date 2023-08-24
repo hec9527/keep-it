@@ -1,0 +1,25 @@
+<view class="calendar">
+  <view class="calendar-month flex-center">{{month}}</view>
+
+  <view class="calendar-table">
+    <view class="calendar-theader">
+      <view class="calendar-theader-item">一</view>
+      <view class="calendar-theader-item">二</view>
+      <view class="calendar-theader-item">三</view>
+      <view class="calendar-theader-item">四</view>
+      <view class="calendar-theader-item">五</view>
+      <view class="calendar-theader-item week">六</view>
+      <view class="calendar-theader-item week">日</view>
+    </view>
+    <view class="calendar-tbody">
+      <view class="calendar-tbody-rows" wx:for="{{monthDay}}" wx:key="index">
+        <view class="calendar-cell{{item.month!=month?' other-month':''}}{{item.day==0 ||item.day==6?' week':''}}{{item.checked? ' checked':''}}" wx:for="{{item}}" wx:key="index">
+          <view>{{item.date}}</view>
+          <view wx:if="{{item.text}}" class="tody">{{item.text}}</view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+</view>

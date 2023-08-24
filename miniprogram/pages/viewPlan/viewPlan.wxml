@@ -1,5 +1,5 @@
 <view class="plan-detail-page">
-  <image src="{{plan.cover}}" class="back-img" mode="aspectFill" />
+  <image src="{{plan.cover}}" class="background-img" mode="aspectFill" />
 
   <view class="plan-detail-main">
     <view class="plan-detail card">
@@ -9,7 +9,7 @@
         <text>#</text>
       </view>
       <view wx:if="{{plan.description}}" class="plan-info-item">
-        <view class="plan-info-label">描述说明</view>
+        <view class="plan-info-label">计划描述</view>
         <view class="plan-info-desc desc">{{plan.description}}</view>
       </view>
       <!-- <view class="plan-info-item">
@@ -17,15 +17,37 @@
         <view class="plan-info-desc intervel">{{plan.intervel}}</view>
       </view> -->
       <view class="plan-info-item">
+        <view class="plan-info-label">打卡进度</view>
+        <view class="plan-info-desc process">
+          <view class="process-track">
+            <view class="process-bar" style="width: {{process}}%"></view>
+          </view>
+          <view class="process-text">
+            <text>{{plan.signedDays.length}}</text>
+            <text> / </text>
+            <text>{{plan.allSignDays}}</text>
+            <text>天</text>
+          </view>
+        </view>
+      </view>
+      <view class="plan-info-item">
         <view class="plan-info-label">计划周期</view>
         <view class="plan-info-desc time">{{plan.startTime}} - {{plan.endTime}}</view>
+      </view>
+    </view>
+
+    <view class="card calendar" wx:if="{{calendar.length}}">
+      <view wx:for="{{calendar}}" wx:key="month">
+        <calendar year="{{item.year}}" month="{{item.month}}" selectDays="{{plan.signedDays}}" startDate="{{plan.startTime}}" endDate="{{plan.endTime}}">
+        </calendar>
+        <view wx:if="{{index<calendar.length-1}}" class="calendar-divider"></view>
       </view>
     </view>
 
     <view wx:if="{{plan.status==='process'}}" class="sign-button-wrap flex-center" catch:touchstart="handleTouchSign" catch:touchend="handleEndSign">
       <view class="sign-button-outline{{pressed?' pressed':''}}"></view>
       <view class="sign-button flex-center">
-        <view class="sign-title">{{signToday?"今日已打卡":"立即打卡"}}</view>
+        <view class="sign-title">{{signToday?"今日已打卡":"长按打卡"}}</view>
       </view>
     </view>
 

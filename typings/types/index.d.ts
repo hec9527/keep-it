@@ -15,7 +15,7 @@ declare type IPlan = {
   startTime: string;
   endTime: string;
   allSignDays: number;
-  signedDays: (string | number)[];
+  signedDays: string[];
   status: IPlanStatus;
   cover: string;
 };
@@ -46,4 +46,17 @@ declare type IIntervel = "day" | "week" | "month" | "wrokday";
 declare type IIntervelItem = {
   type: IIntervel;
   label: string;
+};
+
+declare type ISignCalendar = {
+  year: number;
+  month: number;
+};
+
+declare type ICalendarCell = {
+  year: number;
+  month: number;
+  date: number;
+  day: number;
+  dateStr: string;
 };

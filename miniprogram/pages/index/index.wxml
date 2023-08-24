@@ -1,53 +1,57 @@
 <view class="index-page">
-  <view class="user-info">
-    <view class="user-avatar">
-      <image src="{{userInfo.avatarUrl}}" class="avatar-img" />
-    </view>
-    <view class="user-profile">
-      <view class="nick-name">{{userInfo.nickName}}，欢迎回来</view>
-      <view class="last-login">上次登录时间：{{lastLogin}}</view>
-    </view>
-  </view>
-
-
-  <view wx:if="{{!allTasks.length}}" class="not-found">
-    <image class="not-found-img" src="/asserts/svg/empty.svg" />
-    <view class="not-found-tips">当前还没有打卡目标，赶紧创建一个吧</view>
-    <view class="add-button block-button" bind:tap="onTapAdd">创建打卡目标</view>
-  </view>
-
-  <view wx:else class="main">
-    <view class="filter-wrap">
-      <view wx:for="{{filters}}" wx:key="item.status" class="filter-item {{filterStatus == item.status?'active':''}}" data-status="{{item.status}}" bind:tap="handleFilterClick">
-        {{item.label}}
+  <view class="index-main">
+    <view class="user-info">
+      <view class="user-avatar">
+        <image src="{{userInfo.avatarUrl}}" class="avatar-img" />
+      </view>
+      <view class="user-profile">
+        <view class="nick-name">{{userInfo.nickName}}，欢迎回来</view>
+        <view class="last-login">上次登录时间：{{lastLogin}}</view>
       </view>
     </view>
 
-    <view wx:for="{{tasks}}" wx:key="id" class="plan-item" data-id="{{item.id}}" data-type="{{item.taskType}}" bind:tap="handlePlanTap">
-      <view class="cover">
-        <image class="cover-img" mode="aspectFill" src="{{item.cover}}" />
-        <view class="cover-mask"></view>
+
+    <view wx:if="{{!allTasks.length}}" class="not-found">
+      <image class="not-found-img" src="/asserts/svg/empty.svg" />
+      <view class="not-found-tips">当前还没有打卡目标，赶紧创建一个吧</view>
+      <view class="add-button block-button" bind:tap="onTapAdd">创建打卡目标</view>
+    </view>
+
+    <view wx:else class="main">
+      <view class="filter-wrap">
+        <view wx:for="{{filters}}" wx:key="status" class="filter-item {{filterStatus == item.status?'active':''}}" data-status="{{item.status}}" bind:tap="handleFilterClick">
+          {{item.label}}
+        </view>
       </view>
-      <view class="info">
-        <view class="header">
-          <view class="title">{{item.title}}</view>
-          <view>
-            <view class="progress-bar">
-              <view class="progress-track"></view>
+
+      <view wx:for="{{tasks}}" wx:key="id" class="plan-item" data-id="{{item.id}}" data-type="{{item.taskType}}" bind:tap="handlePlanTap">
+        <view class="cover">
+          <image class="cover-img" mode="aspectFill" src="{{item.cover}}" />
+          <view class="cover-mask"></view>
+        </view>
+        <view class="info">
+          <view class="header">
+            <view class="title">{{item.title}}</view>
+            <view>
+              <view class="progress-bar">
+                <view class="progress-track"></view>
+              </view>
+              <view class="progress"></view>
             </view>
-            <view class="progress"></view>
+          </view>
+          <view class="desc">
+            {{item.description}}
           </view>
         </view>
-        <view class="desc">
-          {{item.description}}
-        </view>
       </view>
-    </view>
 
-    <root-portal>
-      <image class="add-more" src="/asserts/svg/add.svg" bind:tap="onTapAdd" />
-    </root-portal>
+      <root-portal>
+        <image class="add-more" src="/asserts/svg/add.svg" bind:tap="onTapAdd" />
+      </root-portal>
+    </view>
   </view>
 
-  <view class="about" bind:tap="toAboutPage">关于</view>
+  <view class="about flex-center">
+    <text bind:tap="toAboutPage">关于</text>
+  </view>
 </view>
